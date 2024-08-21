@@ -1,0 +1,40 @@
+/*
+goroutines: Used to execute tasks concurrently
+channels: used for communication between goroutines ensuring synchronized execution
+
+-->Difference between Unbuffered and Buffered channels
+
+Unbuffered channels:
+
+Straight forward channels
+No capacity is specified 
+Send operation blocks until another goroutine is ready to receive the value and the receive operation blocks until there is data to be received.
+syntax: make(chan int) / make(chan int,0)
+
+Buffered Channels:
+
+Capacity is specified while creating the channel
+Allows values to be stored in the channel upto the specified capacity.
+Send opeation blocks only when the channel is full and receive operation blocks when the channel is empty
+syntax: make(chan int,5)
+
+-->Pros and cons
+ 
+Unbuffered channels:
+Pros: Synchronization and Simplicity
+Cons: Performance and Potential deadlocks
+
+Buffered channels:
+Pros: Asynchronous Communication, Better performance and Flexibility
+Cons: Complexity, Memory Usage and Potential Deadlocks
+
+
+-->Which channel is best when working with goroutines
+
+It is based the scenario that we are dealing with
+For simple synchronization, unbuffered channels are usually the better choice.
+For scenarios requiring decoupling of producers and consumers, buffered channels provide better performance and flexibility.
+We always need to ensure to manage channels carefully to avoid deadlocks, regardless of whether they are buffered or unbuffered.
+
+
+
