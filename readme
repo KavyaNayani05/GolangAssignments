@@ -1,4 +1,6 @@
 /*
+Introduction
+
 goroutines: Used to execute tasks concurrently
 channels: used for communication between goroutines ensuring synchronized execution
 
