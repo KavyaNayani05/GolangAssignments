@@ -51,7 +51,11 @@ func main() {
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	sum "golang/ass1"
+	"time"
+)
 
 func primes(n int, ch chan int) {
 	for i := 2; i <= n; i++ {
@@ -77,4 +81,6 @@ func main() {
 	for value := range ch {
 		fmt.Println(value)
 	}
+	go sum.Totalsum()
+	time.Sleep(2 * time.Second)
 }
