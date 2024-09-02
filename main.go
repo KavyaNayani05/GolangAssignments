@@ -49,7 +49,8 @@ func main() {
 }
 */
 
-package main
+//goroutines and channels
+/*package main
 
 import (
 	"fmt"
@@ -83,4 +84,85 @@ func main() {
 	}
 	go sum.Totalsum()
 	time.Sleep(2 * time.Second)
+}
+
+*/
+
+/*package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	ch := make(chan int, 2)
+	go func() {
+		for i := 0; i < 3; i++ {
+			fmt.Println(time.Now(), i, "sending")
+			ch <- i
+			fmt.Println(time.Now(), i, "sent")
+		}
+
+		fmt.Println(time.Now(), "all completed")
+	}()
+	time.Sleep(2 * time.Second)
+	fmt.Println(time.Now(), "waiting for messages")
+	fmt.Println(time.Now(), "received", <-ch)
+	fmt.Println(time.Now(), "received", <-ch)
+	fmt.Println(time.Now(), "received", <-ch)
+	fmt.Println(time.Now(), "exiting")
+}
+*/
+
+//reading input from the user
+
+/*package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	//reader := bufio.NewReader(os.Stdin)
+	//fmt.Print("Give input name ")
+	//name, _ := reader.ReadString('\n')
+	//name = strings.TrimSpace(name)
+	//fmt.Printf("the input name given by the user is %v", name)
+	var name string
+	fmt.Println("Enter name ")
+	fmt.Scanf("%s", &name)
+	//(or) fmt.Scan(&name) or fmt.Scanln(&name)
+	x := fmt.Sprintln(name)
+	fmt.Println("name given by the user is ", x)
+}
+*/
+
+package main
+
+import (
+	"database/sql"
+	"fmt"
+	_ "github.com/go-sql-driver/mysql"
+	"golang/api"
+	"log"
+	"net/http"
+)
+
+func main() {
+	dsn := "root:Kavya05@tcp(localhost:3306)/Library"
+	db, err := sql.Open("mysql", dsn)
+	if err != nil {
+		log.Fatal("Error opening database", err)
+	}
+	defer db.Close()
+	if err := db.Ping(); err != nil {
+		log.Fatal("Error connecting to database", err)
+	}
+	fmt.Println("Database connection was successful")
+	api.RegisterRouter(db)
+
+	log.Println("serever strt on port 8080:")
+	log.Fatal(http.ListenAndServe(":8080", nil))
+
 }
